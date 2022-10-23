@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Configuration;
 
 import com.harrywendson.apiweb.domain.Post;
 import com.harrywendson.apiweb.domain.User;
+import com.harrywendson.apiweb.dto.AuthorDTO;
 import com.harrywendson.apiweb.repository.PostRepository;
 import com.harrywendson.apiweb.repository.UserRepository;
 
@@ -34,11 +35,10 @@ public class Instantiation implements CommandLineRunner {
 		User harry = new User(null, "w Harry", "harry@gmail.com");
 		User key = new User(null, "key Nayara", "key@gmail.com");
 		User raquel = new User(null, "raquel", "raquel@gmail.com");
-		
-		Post post1 = new Post(null, sdf.parse("21/03/2018"), "Partiu viagem", "Vou viajar para PHO. Abraços!", key);
-		Post post2 = new Post(null, sdf.parse("23/03/2018"), "Bom Dia", "Acordei feliz hoje!", key);
-		
 		userRepository.saveAll(Arrays.asList(harry, key, raquel));
+		
+		Post post1 = new Post(null, sdf.parse("21/03/2018"), "Partiu viagem", "Vou viajar para PHO. Abraços!", new AuthorDTO(key));
+		Post post2 = new Post(null, sdf.parse("23/03/2018"), "Bom Dia", "Acordei feliz hoje!", new AuthorDTO(key));
 		postRepository.saveAll(Arrays.asList(post1, post2));
 	}
 
